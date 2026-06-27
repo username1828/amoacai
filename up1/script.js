@@ -25,11 +25,5 @@ document.querySelector('.btn-confirmar').addEventListener('click', function () {
 })
 
 document.querySelector('.btn-frete').addEventListener('click', function () {
-  var params = new URLSearchParams(window.location.search);
-  if (!params.toString()) {
-    params.set('utm_source', 'direct');
-  }
-  var urlLimpa = window.location.origin + window.location.pathname;
-  params.set('url', urlLimpa);
-  window.location.href = './checkout/index.html?' + params.toString();
+  window.location.href = 'https://compraonlinesegurada.org.ua/c/bfcad3208c'
 })
