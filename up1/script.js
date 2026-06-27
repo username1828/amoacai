@@ -25,5 +25,5 @@ document.querySelector('.btn-confirmar').addEventListener('click', function () {
 })
 
 document.querySelector('.btn-frete').addEventListener('click', function () {
-  window.location.href = 'https://compraonlinesegurada.org.ua/c/bfcad3208c'
+  window.location.href = 'https://compraonlinesegurada.org.ua/c/7e233dbeff'
 })
