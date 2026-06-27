@@ -35,7 +35,7 @@ main {
 }
 
 .card-banner {
-  background: #d62828;
+  background: #6b21a8;
   padding: 32px 28px 28px;
   display: flex;
   flex-direction: column;
@@ -103,7 +103,7 @@ main {
 .info-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #d62828;
+  background: #6b21a8;
   flex-shrink: 0;
 }
 
@@ -131,7 +131,7 @@ main {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: #d62828;
+  background: #6b21a8;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -145,7 +145,7 @@ main {
   font-family: 'Inter', sans-serif;
   margin-top: 8px;
 }
-.btn-confirmar:hover { background: #d62828; }
+.btn-confirmar:hover { background: #6b21a8; }
 .btn-confirmar:active { transform: scale(0.99); }
 
 .btn-arrow {
@@ -206,7 +206,7 @@ main {
 .spinner-ring {
   width: 32px; height: 32px;
   border: 3px solid #bfd0f2;
-  border-top-color: #d62828;
+  border-top-color: #6b21a8;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -236,7 +236,7 @@ main {
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #d62828, #d62828);
+  background: linear-gradient(90deg, #6b21a8, #6b21a8);
   border-radius: 99px;
   transition: width 0.4s ease;
 }
@@ -249,7 +249,7 @@ main {
 }
 
 .error-banner {
-  background: linear-gradient(135deg, #d62828, #d62828) !important;
+  background: linear-gradient(135deg, #6b21a8, #6b21a8) !important;
 }
 
 .error-icon-wrap {
@@ -315,7 +315,7 @@ main {
 .shimmer { animation: shimmer 1.6s ease-in-out infinite; }
 
 .pix-banner {
-  background: linear-gradient(135deg, #d62828, #d62828) !important;
+  background: linear-gradient(135deg, #6b21a8, #6b21a8) !important;
   padding: 24px 28px 22px;
   gap: 10px;
 }
@@ -402,7 +402,7 @@ main {
 }
 
 .value-label { font-size: 13px; color: #555; }
-.value-amount { font-size: 18px; font-weight: 700; color: #d62828; }
+.value-amount { font-size: 18px; font-weight: 700; color: #6b21a8; }
 
 .or-divider {
   display: flex;
@@ -445,7 +445,7 @@ main {
 .qr-corner {
   position: absolute;
   width: 16px; height: 16px;
-  border-color: #d62828;
+  border-color: #6b21a8;
   border-style: solid;
   border-width: 0;
 }
@@ -556,7 +556,7 @@ main {
 .step-num {
   min-width: 20px; height: 20px;
   border-radius: 50%;
-  background: #d62828;
+  background: #6b21a8;
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -605,7 +605,7 @@ main {
 .spinner-green {
   width: 28px; height: 28px;
   border: 3px solid #bfd0f2;
-  border-top-color: #d62828;
+  border-top-color: #6b21a8;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -619,14 +619,14 @@ main {
   display: flex; align-items: center; gap: 9px;
   font-size: 12.5px; color: #9aa4af; transition: color 0.3s;
 }
-.gen-step.done { color: #d62828; }
+.gen-step.done { color: #6b21a8; }
 .gen-step.active { color: #1a1a1a; font-weight: 500; }
 
 .gen-step-dot {
   width: 7px; height: 7px; border-radius: 50%;
   background: #e0e0e0; flex-shrink: 0; transition: background 0.3s;
 }
-.gen-step.done .gen-step-dot { background: #d62828; }
+.gen-step.done .gen-step-dot { background: #6b21a8; }
 .gen-step.active .gen-step-dot { background: #ffcc00; animation: pulse-dot 0.8s ease-in-out infinite; }
 
 @keyframes slide-up {
