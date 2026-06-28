@@ -42,7 +42,6 @@ function Index() {
   const [cartOpen, setCartOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [notes, setNotes] = useState("");
-  const [toast, setToast] = useState<string | null>(null);
   const [userLoc, setUserLoc] = useState<string>("");
   const onLocResolved = useCallback((label: string) => setUserLoc(label), []);
   const productRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -127,8 +126,6 @@ function Index() {
       },
     ]);
     setModalProduct(null);
-    setToast(`${p.name} adicionado ao carrinho`);
-    setTimeout(() => setToast(null), 2500);
   };
   const setQty = (uid: string, qty: number) =>
     setCart((c) =>
@@ -532,13 +529,6 @@ function Index() {
               </button>
             </div>
           </aside>
-        </div>
-      )}
-
-      {/* Toast */}
-      {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] rounded-full bg-foreground text-background px-5 py-3 text-sm shadow-2xl animate-in fade-in slide-in-from-bottom-3">
-          {toast}
         </div>
       )}
 

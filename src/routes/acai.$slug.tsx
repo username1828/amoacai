@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ShoppingCart, Check, Star, ShieldCheck, Bike, Clock } from "lucide-react";
+import { ArrowLeft, ShoppingCart, Check, Star, Bike, Clock } from "lucide-react";
 import { PRODUCTS, formatBRL } from "@/lib/products";
 import { getGroupsForCategory } from "@/lib/productOptions";
 import { loadCart, saveCart, type StoredCartItem } from "@/lib/cartStorage";
@@ -213,9 +213,7 @@ function ProductPage() {
           />
         </div>
 
-        <div className="px-5 grid grid-cols-3 gap-2">
-          <Badge icon={<ShieldCheck size={18} />} label="Pagamento seguro" />
-          <Badge icon={<Bike size={18} />} label="Entrega rápida" />
+        <div className="px-5">
           <Badge icon={<Star size={18} />} label="Avaliação 4,9" />
         </div>
       </main>

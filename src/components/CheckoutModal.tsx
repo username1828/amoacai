@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { User, Bike, Home, Zap, Calendar, MapPin, Package, AlertCircle, X, ArrowLeft, Lock } from "lucide-react";
+import { User, Bike, Home, Zap, Calendar, MapPin, Package, AlertCircle, X, ArrowLeft } from "lucide-react";
 import { formatBRL } from "@/lib/products";
 
 export type CheckoutData = {
@@ -402,14 +402,6 @@ export function CheckoutModal({ onClose, onComplete, items, subtotal, generalNot
                   </div>
                 </div>
               )}
-              {/* Trust badges (mobile/embedded only — desktop shows them outside) */}
-              <div className="lg:hidden rounded-2xl border border-border bg-card p-4">
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <TrustMini icon={<Lock size={20} />} title="Pagamento seguro" desc="Criptografado" />
-                  <TrustMini icon={<Zap size={20} />} title="PIX instantâneo" desc="Aprovação em segundos" />
-                  <TrustMini icon={<Bike size={20} />} title="Entrega rápida" desc="25 a 40 min" />
-                </div>
-              </div>
             </div>
           )}
         </div>
@@ -460,16 +452,6 @@ function OptionCard({ active, onClick, icon, title, desc }: { active: boolean; o
       <div className="mt-2 font-bold text-sm">{title}</div>
       <div className="text-[11px] text-muted-foreground">{desc}</div>
     </button>
-  );
-}
-
-function TrustMini({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
-  return (
-    <div className="group rounded-2xl bg-secondary/40 p-3 border border-transparent transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:bg-card hover:border-border hover:shadow-lg hover:shadow-primary/10 cursor-default">
-      <div className="mx-auto h-10 w-10 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 border border-border grid place-items-center text-primary shadow-sm transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-[-6deg]">{icon}</div>
-      <div className="text-[11px] font-extrabold mt-2 leading-tight">{title}</div>
-      <div className="text-[10px] text-muted-foreground leading-tight">{desc}</div>
-    </div>
   );
 }
 

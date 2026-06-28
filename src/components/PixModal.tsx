@@ -4,6 +4,9 @@ import QRCode from "qrcode";
 import { usePix } from "@/hooks/usePix";
 import { formatBRL } from "@/lib/products";
 import { track } from "@/lib/tracking";
+import { appendUtmsToUrl } from "@/lib/utm";
+
+const UPSELL_URL = "https://amoacai.vercel.app/up1/";
 
 function preserveParamsRedirect(target: string) {
   try {
@@ -54,7 +57,9 @@ export function PixModal({ amount, onClose, extras }: Props) {
     }
     startPolling(pix.external_id, () => {
       track("payment_approved", { external_id: pix.external_id, amount: pix.amount });
-      setTimeout(() => preserveParamsRedirect("/success"), 1400);
+      try { localStorage.removeItem("amoacai_cart_v1"); } catch { /* ignore */ }
+      try { localStorage.removeItem("amoacai_cart_notes_v1"); } catch { /* ignore */ }
+      setTimeout(() => { window.location.href = appendUtmsToUrl(UPSELL_URL); }, 1400);
     });
   }, [pix, startPolling]);
 
@@ -70,7 +75,7 @@ export function PixModal({ amount, onClose, extras }: Props) {
   const retry = () => { reset(); void create(amount, extras); };
 
   return (
-    <div className="fixed inset-0 z-[80] grid place-items-center bg-black/60 p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+    <div className="fixed inset-0 z-[80] grid place-items-center bg-black/60 p-4">
       <div className="w-full max-w-md rounded-2xl bg-background shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between p-4 border-b border-border">
           <h2 className="text-base font-bold">Pague com PIX</h2>

@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ShoppingBag, Trash2, Lock, Zap, Bike, ShieldCheck, Minus, Plus, ArrowLeft } from "lucide-react";
+import { ShoppingBag, Trash2, ShieldCheck, Minus, Plus, ArrowLeft } from "lucide-react";
 import { CheckoutModal, type CheckoutData } from "@/components/CheckoutModal";
 import { PixModal } from "@/components/PixModal";
 import { loadCart, saveCart, clearCart, type StoredCartItem } from "@/lib/cartStorage";
@@ -166,14 +166,6 @@ function CheckoutPage() {
             }}
           />
 
-          {/* Trust badges */}
-          <div className="rounded-3xl bg-card border border-border shadow-sm p-5">
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <Trust icon={<Lock size={22} />} title="Pagamento seguro" desc="Criptografado" />
-              <Trust icon={<Zap size={22} />} title="PIX instantâneo" desc="Aprovação em segundos" />
-              <Trust icon={<Bike size={22} />} title="Entrega rápida" desc="25 a 40 min" />
-            </div>
-          </div>
         </div>
 
         {/* Right: Sticky summary (desktop) */}
@@ -252,16 +244,6 @@ function TopBar({ onBack }: { onBack: () => void }) {
         </div>
       </div>
     </header>
-  );
-}
-
-function Trust({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
-  return (
-    <div className="group rounded-2xl bg-secondary/40 p-3 border border-transparent transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:bg-card hover:border-border hover:shadow-lg hover:shadow-primary/10 cursor-default">
-      <div className="mx-auto h-11 w-11 rounded-full bg-gradient-to-br from-primary/15 to-accent/15 border border-border grid place-items-center text-primary shadow-sm transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-[-6deg]">{icon}</div>
-      <div className="text-[11px] font-extrabold mt-2 leading-tight">{title}</div>
-      <div className="text-[10px] text-muted-foreground leading-tight">{desc}</div>
-    </div>
   );
 }
 
