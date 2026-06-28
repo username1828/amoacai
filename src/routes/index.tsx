@@ -112,7 +112,7 @@ function Index() {
   const jumpToProduct = (p: Product) => {
     setSearchFocus(false);
     setQuery("");
-    navigate({ to: "/acai/$slug", params: { slug: p.slug }, search: (s: Record<string, unknown>) => s ?? {} });
+    setModalProduct(p);
   };
 
   const addToCart = (p: Product, chosen: ChosenOptions) => {
@@ -233,12 +233,12 @@ function Index() {
               <h2 className="text-lg font-extrabold mb-3 pb-2 border-b border-border">{cat}</h2>
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 {items.map((p) => (
-                  <Link
-                    to="/acai/$slug"
-                    params={{ slug: p.slug }}
+                  <button
+                    type="button"
                     key={p.id}
                     ref={(el) => { productRefs.current[p.id] = el; }}
-                    className="flex flex-col rounded-2xl bg-card border border-border overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]"
+                    onClick={() => setModalProduct(p)}
+                    className="text-left flex flex-col rounded-2xl bg-card border border-border overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]"
                   >
                     <div className="aspect-square overflow-hidden bg-muted">
                       <img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover" />
@@ -262,7 +262,7 @@ function Index() {
                         </span>
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 ))}
               </div>
             </section>
