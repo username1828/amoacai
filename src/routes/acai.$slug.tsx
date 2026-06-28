@@ -6,7 +6,7 @@ import { getGroupsForCategory } from "@/lib/productOptions";
 import { loadCart, saveCart, type StoredCartItem } from "@/lib/cartStorage";
 import { captureUtmsFromLocation } from "@/lib/utm";
 import { track } from "@/lib/tracking";
-import logoAsset from "@/assets/logo.webp.asset.json";
+const logoAsset = { url: "/uploads/logo.png" };
 
 export const Route = createFileRoute("/acai/$slug")({
   loader: ({ params }) => {

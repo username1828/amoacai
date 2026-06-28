@@ -7,7 +7,7 @@ import { loadCart, saveCart, clearCart, type StoredCartItem } from "@/lib/cartSt
 import { captureUtmsFromLocation, readUtms } from "@/lib/utm";
 import { formatBRL } from "@/lib/products";
 import { track } from "@/lib/tracking";
-import logoAsset from "@/assets/logo.webp.asset.json";
+const logoAsset = { url: "/uploads/logo.png" };
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({

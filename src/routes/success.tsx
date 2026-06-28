@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Check, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
-import logoAsset from "@/assets/logo.webp.asset.json";
+const logoAsset = { url: "/uploads/logo.png" };
 import { appendUtmsToUrl, captureUtmsFromLocation } from "@/lib/utm";
 import { track } from "@/lib/tracking";
 

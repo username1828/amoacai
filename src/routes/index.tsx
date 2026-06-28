@@ -5,8 +5,8 @@ import { CATEGORIES, PRODUCTS, REVIEWS, formatBRL, type Product } from "@/lib/pr
 import { GeoPopup } from "@/components/GeoPopup";
 import { PurchaseToast } from "@/components/PurchaseToast";
 import { ProductModal, type ChosenOptions } from "@/components/ProductModal";
-import heroBanner from "@/assets/hero-banner.webp.asset.json";
-import logoAsset from "@/assets/logo.webp.asset.json";
+const heroBanner = { url: "/uploads/hero-banner.jpg" };
+const logoAsset = { url: "/uploads/logo.png" };
 import { captureUtmsFromLocation } from "@/lib/utm";
 import { saveCart } from "@/lib/cartStorage";
 
