@@ -88,6 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Peça seu açaí fresquinho com entrega rápida." },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: "/uploads/logo.png" },
       {
         rel: "stylesheet",
         href: appCss,

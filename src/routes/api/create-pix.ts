@@ -57,13 +57,35 @@ export const Route = createFileRoute("/api/create-pix")({
 
         const payload = {
           amount: amountCents,
+          payment_method: "pix",
+          paymentMethod: "PIX",
           description: descParts.join(" · ").slice(0, 120),
           reference: orderRef,
+          external_id: orderRef,
           productHash,
+          product_hash: productHash,
+          products: [
+            {
+              hash: productHash,
+              name: "Pedido AmoAçaí",
+              quantity: 1,
+              price: amountCents,
+            },
+          ],
+          items: [
+            {
+              hash: productHash,
+              title: "Pedido AmoAçaí",
+              quantity: 1,
+              unitPrice: amountCents,
+              tangible: true,
+            },
+          ],
           customer: {
             name: customer.name,
             email: customer.email,
             document: customer.document,
+            documentType: "CPF",
             phone: customer.phone,
           },
           metadata: {
