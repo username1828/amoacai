@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { ShoppingBag, Trash2, ShieldCheck, Minus, Plus, ArrowLeft } from "lucide-react";
+import { ShoppingBag, Trash2, ShieldCheck, Minus, Plus, ArrowLeft, Clock, QrCode } from "lucide-react";
 import { CheckoutModal, type CheckoutData } from "@/components/CheckoutModal";
 import { PixModal } from "@/components/PixModal";
 import { loadCart, saveCart, clearCart, type StoredCartItem } from "@/lib/cartStorage";
@@ -26,6 +26,8 @@ function CheckoutPage() {
   const [generalNotes, setGeneralNotes] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [pixOpen, setPixOpen] = useState(false);
+  const [pixMinimized, setPixMinimized] = useState(false);
+  const [pixStatus, setPixStatus] = useState<"loading" | "ready" | "paid" | "error">("loading");
   const [checkoutData, setCheckoutData] = useState<CheckoutData | null>(null);
 
   useEffect(() => {
@@ -163,6 +165,7 @@ function CheckoutPage() {
             onComplete={(data) => {
               setCheckoutData(data);
               setPixOpen(true);
+              setPixMinimized(false);
             }}
           />
 
@@ -201,11 +204,9 @@ function CheckoutPage() {
       {pixOpen && (
         <PixModal
           amount={subtotal + (checkoutData?.shipping_fee ?? 0)}
-          onClose={() => {
-            setPixOpen(false);
-            clearCart();
-            goHome();
-          }}
+          minimized={pixMinimized}
+          onStatusChange={setPixStatus}
+          onClose={() => setPixMinimized(true)}
           extras={checkoutData ? {
             customer: {
               name: checkoutData.customer.name,
@@ -219,6 +220,26 @@ function CheckoutPage() {
             utm: readUtms(),
           } : undefined}
         />
+      )}
+
+      {pixOpen && pixMinimized && pixStatus !== "paid" && (
+        <div className="fixed bottom-0 inset-x-0 z-[70] p-3 bg-background border-t border-border shadow-2xl animate-in slide-in-from-bottom">
+          <div className="mx-auto max-w-6xl flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-amber-100 text-amber-700 grid place-items-center shrink-0">
+              <Clock size={20} className="animate-pulse" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-extrabold leading-tight">Aguardando pagamento</div>
+              <div className="text-[11px] text-muted-foreground truncate">Assim que o PIX for confirmado você será redirecionado.</div>
+            </div>
+            <button
+              onClick={() => setPixMinimized(false)}
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-xs font-bold shadow hover:opacity-90 active:scale-[0.98] transition shrink-0"
+            >
+              <QrCode size={14} /> Ver PIX
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

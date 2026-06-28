@@ -34,15 +34,17 @@ function useCountdown(expiresAt: string | null) {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-type Props = { amount: number; onClose: () => void; extras?: Record<string, unknown> };
+type Props = { amount: number; onClose: () => void; extras?: Record<string, unknown>; minimized?: boolean; onStatusChange?: (s: "loading" | "ready" | "paid" | "error") => void };
 
-export function PixModal({ amount, onClose, extras }: Props) {
+export function PixModal({ amount, onClose, extras, minimized, onStatusChange }: Props) {
   const { status, pix, error, create, startPolling, reset } = usePix();
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const countdown = useCountdown(pix?.expires_at ?? null);
 
   useEffect(() => { void create(amount, extras); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, []);
+
+  useEffect(() => { onStatusChange?.(status === "idle" ? "loading" : status); }, [status, onStatusChange]);
 
   useEffect(() => {
     if (!pix) return;
@@ -73,6 +75,8 @@ export function PixModal({ amount, onClose, extras }: Props) {
   };
 
   const retry = () => { reset(); void create(amount, extras); };
+
+  if (minimized) return null;
 
   return (
     <div className="fixed inset-0 z-[80] grid place-items-center bg-black/60 p-4">
