@@ -4,7 +4,7 @@ import { ShoppingBag, Trash2, ShieldCheck, Minus, Plus, ArrowLeft, Clock, QrCode
 import { CheckoutModal, type CheckoutData } from "@/components/CheckoutModal";
 import { PixModal } from "@/components/PixModal";
 import { loadCart, saveCart, clearCart, type StoredCartItem } from "@/lib/cartStorage";
-import { captureUtmsFromLocation, readUtms } from "@/lib/utm";
+import { captureUtmsFromLocation, getUtmsSearchRecord, readUtms } from "@/lib/utm";
 import { formatBRL } from "@/lib/products";
 import { track } from "@/lib/tracking";
 import { ASSETS } from "@/lib/assets";
@@ -60,7 +60,7 @@ function CheckoutPage() {
   };
 
   const goHome = () => {
-    navigate({ to: "/", search: (prev: Record<string, unknown>) => prev ?? {} });
+    navigate({ to: "/", search: (prev: Record<string, unknown>) => ({ ...(prev ?? {}), ...getUtmsSearchRecord() }) });
   };
 
   const lines = items.map((i) => ({
@@ -166,6 +166,7 @@ function CheckoutPage() {
               setCheckoutData(data);
               setPixOpen(true);
               setPixMinimized(false);
+              try { localStorage.setItem("amoacai_checkout_v1", JSON.stringify(data)); } catch { /* ignore */ }
             }}
           />
 

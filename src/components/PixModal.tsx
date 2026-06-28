@@ -6,7 +6,7 @@ import { formatBRL } from "@/lib/products";
 import { track } from "@/lib/tracking";
 import { appendUtmsToUrl } from "@/lib/utm";
 
-const UPSELL_URL = "https://amoacai.vercel.app/up1/";
+const UPSELL_URL = "/up1";
 
 function preserveParamsRedirect(target: string) {
   try {

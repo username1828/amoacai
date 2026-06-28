@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as Up1RouteImport } from './routes/up1'
 import { Route as SuccessRouteImport } from './routes/success'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as IndexRouteImport } from './routes/index'
@@ -18,6 +19,11 @@ import { Route as ApiCheckStatusRouteImport } from './routes/api/check-status'
 import { Route as AcaiSlugRouteImport } from './routes/acai.$slug'
 import { Route as ApiPublicWebhookRouteImport } from './routes/api/public.webhook'
 
+const Up1Route = Up1RouteImport.update({
+  id: '/up1',
+  path: '/up1',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SuccessRoute = SuccessRouteImport.update({
   id: '/success',
   path: '/success',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/success': typeof SuccessRoute
+  '/up1': typeof Up1Route
   '/acai/$slug': typeof AcaiSlugRoute
   '/api/check-status': typeof ApiCheckStatusRoute
   '/api/create-pix': typeof ApiCreatePixRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/success': typeof SuccessRoute
+  '/up1': typeof Up1Route
   '/acai/$slug': typeof AcaiSlugRoute
   '/api/check-status': typeof ApiCheckStatusRoute
   '/api/create-pix': typeof ApiCreatePixRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/success': typeof SuccessRoute
+  '/up1': typeof Up1Route
   '/acai/$slug': typeof AcaiSlugRoute
   '/api/check-status': typeof ApiCheckStatusRoute
   '/api/create-pix': typeof ApiCreatePixRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/success'
+    | '/up1'
     | '/acai/$slug'
     | '/api/check-status'
     | '/api/create-pix'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/success'
+    | '/up1'
     | '/acai/$slug'
     | '/api/check-status'
     | '/api/create-pix'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/success'
+    | '/up1'
     | '/acai/$slug'
     | '/api/check-status'
     | '/api/create-pix'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
   SuccessRoute: typeof SuccessRoute
+  Up1Route: typeof Up1Route
   AcaiSlugRoute: typeof AcaiSlugRoute
   ApiCheckStatusRoute: typeof ApiCheckStatusRoute
   ApiCreatePixRoute: typeof ApiCreatePixRoute
@@ -136,6 +149,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/up1': {
+      id: '/up1'
+      path: '/up1'
+      fullPath: '/up1'
+      preLoaderRoute: typeof Up1RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/success': {
       id: '/success'
       path: '/success'
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
   SuccessRoute: SuccessRoute,
+  Up1Route: Up1Route,
   AcaiSlugRoute: AcaiSlugRoute,
   ApiCheckStatusRoute: ApiCheckStatusRoute,
   ApiCreatePixRoute: ApiCreatePixRoute,

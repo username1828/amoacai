@@ -4,7 +4,7 @@ import { ArrowLeft, ShoppingCart, Check, Star, Bike, Clock } from "lucide-react"
 import { PRODUCTS, formatBRL } from "@/lib/products";
 import { getGroupsForCategory } from "@/lib/productOptions";
 import { loadCart, saveCart, type StoredCartItem } from "@/lib/cartStorage";
-import { captureUtmsFromLocation } from "@/lib/utm";
+import { captureUtmsFromLocation, getUtmsSearchRecord } from "@/lib/utm";
 import { track } from "@/lib/tracking";
 import { ASSETS } from "@/lib/assets";
 
@@ -97,7 +97,7 @@ function ProductPage() {
     const next = [...items, item];
     saveCart(next, storedNotes);
     track("add_to_cart", { id: product.id, name: product.name, qty, price: unit, total });
-    navigate({ to: "/checkout", search: (s: Record<string, unknown>) => s ?? {} });
+    navigate({ to: "/checkout", search: (s: Record<string, unknown>) => ({ ...(s ?? {}), ...getUtmsSearchRecord() }) });
   };
 
   return (
@@ -105,7 +105,7 @@ function ProductPage() {
       <header className="sticky top-0 z-30 bg-background/90 backdrop-blur border-b border-border">
         <div className="mx-auto max-w-2xl px-4 h-14 flex items-center justify-between">
           <button
-            onClick={() => navigate({ to: "/", search: (s: Record<string, unknown>) => s ?? {} })}
+            onClick={() => navigate({ to: "/", search: (s: Record<string, unknown>) => ({ ...(s ?? {}), ...getUtmsSearchRecord() }) })}
             className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 hover:bg-secondary text-sm font-semibold"
           >
             <ArrowLeft size={16} /> Voltar
@@ -113,6 +113,7 @@ function ProductPage() {
           <img src={ASSETS.logo} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
           <Link
             to="/checkout"
+            search={getUtmsSearchRecord()}
             className="text-xs font-bold text-primary hover:underline"
           >Sacola</Link>
         </div>

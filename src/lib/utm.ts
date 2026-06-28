@@ -56,3 +56,22 @@ export function appendUtmsToUrl(target: string): string {
     return target;
   }
 }
+
+/** Returns stored UTMs as a plain record, suitable for TanStack Router `search`. */
+export function getUtmsSearchRecord(): Record<string, string> {
+  const utms = readUtms();
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(utms)) {
+    if (v) out[k] = v;
+  }
+  return out;
+}
+
+/** Returns "?utm_source=...&..." (empty string if none). */
+export function buildUtmQueryString(): string {
+  const rec = getUtmsSearchRecord();
+  const keys = Object.keys(rec);
+  if (keys.length === 0) return "";
+  const sp = new URLSearchParams(rec);
+  return `?${sp.toString()}`;
+}

@@ -6,7 +6,7 @@ import { GeoPopup } from "@/components/GeoPopup";
 import { PurchaseToast } from "@/components/PurchaseToast";
 import { ProductModal, type ChosenOptions } from "@/components/ProductModal";
 import { ASSETS } from "@/lib/assets";
-import { captureUtmsFromLocation } from "@/lib/utm";
+import { captureUtmsFromLocation, appendUtmsToUrl } from "@/lib/utm";
 import { saveCart } from "@/lib/cartStorage";
 
 export const Route = createFileRoute("/")({
@@ -514,9 +514,8 @@ function Index() {
                   if (subtotal <= 0) return;
                   saveCart(cart, notes);
                   setCartOpen(false);
-                  // Preserve UTMs and any current query params on navigation
-                  const search = typeof window !== "undefined" ? window.location.search : "";
-                  window.location.href = `/checkout${search}`;
+                  // Preserve UTMs (from URL or sessionStorage) on navigation
+                  window.location.href = appendUtmsToUrl("/checkout");
                 }}
                 disabled={cart.length === 0}
                 className="w-full rounded-2xl bg-accent text-accent-foreground py-3.5 text-sm font-extrabold shadow-lg disabled:opacity-50 hover:opacity-95 active:scale-[0.99] transition flex items-center justify-between px-5"
