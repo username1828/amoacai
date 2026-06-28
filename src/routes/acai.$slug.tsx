@@ -6,7 +6,7 @@ import { getGroupsForCategory } from "@/lib/productOptions";
 import { loadCart, saveCart, type StoredCartItem } from "@/lib/cartStorage";
 import { captureUtmsFromLocation } from "@/lib/utm";
 import { track } from "@/lib/tracking";
-const logoAsset = { url: "/uploads/logo.png" };
+import { ASSETS } from "@/lib/assets";
 
 export const Route = createFileRoute("/acai/$slug")({
   loader: ({ params }) => {
@@ -110,7 +110,7 @@ function ProductPage() {
           >
             <ArrowLeft size={16} /> Voltar
           </button>
-          <img src={logoAsset.url} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
+          <img src={ASSETS.logo} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
           <Link
             to="/checkout"
             className="text-xs font-bold text-primary hover:underline"

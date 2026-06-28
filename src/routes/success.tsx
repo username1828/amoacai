@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Check, ShieldCheck, Sparkles, ArrowRight } from "lucide-react";
-const logoAsset = { url: "/uploads/logo.png" };
+import { ASSETS } from "@/lib/assets";
 import { appendUtmsToUrl, captureUtmsFromLocation } from "@/lib/utm";
 import { track } from "@/lib/tracking";
 
@@ -36,7 +36,7 @@ function SuccessPage() {
     <div className="min-h-screen bg-gradient-to-b from-secondary/30 to-background flex flex-col">
       <header className="border-b border-border bg-background/90 backdrop-blur sticky top-0">
         <div className="mx-auto max-w-2xl px-4 h-16 flex items-center justify-center gap-2">
-          <img src={logoAsset.url} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
+          <img src={ASSETS.logo} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
           <span className="font-extrabold text-sm">AmoAçaí</span>
         </div>
       </header>

@@ -7,7 +7,7 @@ import { loadCart, saveCart, clearCart, type StoredCartItem } from "@/lib/cartSt
 import { captureUtmsFromLocation, readUtms } from "@/lib/utm";
 import { formatBRL } from "@/lib/products";
 import { track } from "@/lib/tracking";
-const logoAsset = { url: "/uploads/logo.png" };
+import { ASSETS } from "@/lib/assets";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -244,7 +244,7 @@ function TopBar({ onBack }: { onBack: () => void }) {
           <ArrowLeft size={16} /> Voltar
         </button>
         <div className="flex items-center gap-2">
-          <img src={logoAsset.url} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
+          <img src={ASSETS.logo} alt="AmoAçaí" className="h-9 w-9 rounded-full object-contain bg-white border border-border" />
           <span className="font-extrabold text-sm hidden sm:inline">Finalizar pedido</span>
         </div>
         <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-accent">

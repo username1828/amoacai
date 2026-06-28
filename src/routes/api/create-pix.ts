@@ -12,10 +12,16 @@ export const Route = createFileRoute("/api/create-pix")({
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204, headers: CORS }),
       POST: async ({ request }) => {
-        const apiKey = process.env.PARADISE_API_KEY;
-        const productHash = process.env.PARADISE_PRODUCT_HASH;
+        const apiKey = process.env.PARADISE_API_KEY || process.env.API_KEY;
+        const productHash = process.env.PARADISE_PRODUCT_HASH || process.env.PRODUCT_HASH;
         if (!apiKey || !productHash) {
-          return Response.json({ error: "Server not configured" }, { status: 500, headers: CORS });
+          return Response.json(
+            {
+              error: "PIX não configurado",
+              message: "Configure PARADISE_API_KEY e PARADISE_PRODUCT_HASH nas variáveis de ambiente do servidor.",
+            },
+            { status: 500, headers: CORS },
+          );
         }
 
         let body: {
@@ -29,7 +35,7 @@ export const Route = createFileRoute("/api/create-pix")({
         } = {};
         try { body = await request.json(); } catch { /* allow empty */ }
 
-        const amount = Number(body.amount);
+        const amount = Number(String(body.amount).replace(",", "."));
         if (!Number.isFinite(amount) || amount <= 0) {
           return Response.json({ error: "Invalid amount" }, { status: 400, headers: CORS });
         }
@@ -98,20 +104,37 @@ export const Route = createFileRoute("/api/create-pix")({
             vals.find((v) => typeof v === "string" && v.length > 0) as string | undefined;
 
           const root = data as Record<string, unknown>;
-          const nested = (root.pix ?? root.data ?? root.transaction ?? {}) as Record<string, unknown>;
-          const pixNode = (root.pix ?? nested.pix ?? {}) as Record<string, unknown>;
+          const nested = (root.pix ?? root.data ?? root.transaction ?? root.payment ?? {}) as Record<string, unknown>;
+          const pixNode = (root.pix ?? nested.pix ?? nested.payment ?? {}) as Record<string, unknown>;
 
           const qr_code = pickFirst(
-            root.qr_code as string, nested.qr_code as string, pixNode.qr_code as string,
+            root.qr_code as string,
+            root.pix_code as string,
+            root.copy_paste as string,
+            root.emv as string,
+            nested.qr_code as string,
+            nested.pix_code as string,
+            nested.copy_paste as string,
+            nested.emv as string,
+            pixNode.qr_code as string,
+            pixNode.pix_code as string,
+            pixNode.copy_paste as string,
+            pixNode.emv as string,
           );
           const qr_code_image = pickFirst(
             root.qr_code_base64 as string, nested.qr_code_base64 as string,
-            root.qr_code_image as string,
+            root.qr_code_image as string, nested.qr_code_image as string,
+            pixNode.qr_code_base64 as string, pixNode.qr_code_image as string,
           );
           const external_id = pickFirst(
             root.transaction_id != null ? String(root.transaction_id) : undefined,
+            root.hash != null ? String(root.hash) : undefined,
+            root.external_id != null ? String(root.external_id) : undefined,
             root.id as string,
             nested.transaction_id != null ? String(nested.transaction_id) : undefined,
+            nested.hash != null ? String(nested.hash) : undefined,
+            nested.external_id != null ? String(nested.external_id) : undefined,
+            nested.id != null ? String(nested.id) : undefined,
           );
           const expires_at = pickFirst(
             root.expires_at as string, nested.expires_at as string,

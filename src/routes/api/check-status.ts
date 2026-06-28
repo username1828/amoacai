@@ -11,7 +11,7 @@ export const Route = createFileRoute("/api/check-status")({
     handlers: {
       OPTIONS: async () => new Response(null, { status: 204, headers: CORS }),
       GET: async ({ request }) => {
-        const apiKey = process.env.PARADISE_API_KEY;
+        const apiKey = process.env.PARADISE_API_KEY || process.env.API_KEY;
         if (!apiKey) {
           return Response.json({ status: "pending" }, { headers: CORS });
         }

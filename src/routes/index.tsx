@@ -5,8 +5,7 @@ import { CATEGORIES, PRODUCTS, REVIEWS, formatBRL, type Product } from "@/lib/pr
 import { GeoPopup } from "@/components/GeoPopup";
 import { PurchaseToast } from "@/components/PurchaseToast";
 import { ProductModal, type ChosenOptions } from "@/components/ProductModal";
-const heroBanner = { url: "/uploads/hero-banner.jpg" };
-const logoAsset = { url: "/uploads/logo.png" };
+import { ASSETS } from "@/lib/assets";
 import { captureUtmsFromLocation } from "@/lib/utm";
 import { saveCart } from "@/lib/cartStorage";
 
@@ -17,7 +16,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "AmoAçaí – Açaíteria. Peça seu açaí fresquinho com entrega rápida. Combos, barcas, garrafas e muito mais!" },
       { property: "og:title", content: "AmoAçaí - Delivery" },
       { property: "og:description", content: "Peça seu açaí fresquinho com entrega rápida." },
-      { property: "og:image", content: heroBanner.url },
+      { property: "og:image", content: ASSETS.heroBanner },
     ],
   }),
   component: Index,
@@ -144,7 +143,7 @@ function Index() {
           <span className="h-1.5 w-1.5 rounded-full bg-current" /> ABERTO AGORA
         </div>
         <img
-          src={heroBanner.url}
+          src={ASSETS.heroBanner}
           alt="AmoAçaí - Feito com amor"
           className="w-full h-44 sm:h-56 md:h-72 object-cover object-center"
         />
@@ -153,7 +152,7 @@ function Index() {
       {/* Brand card */}
       <section className="relative -mt-10 mx-auto max-w-2xl px-4 text-center">
         <div className="mx-auto h-28 w-28 sm:h-32 sm:w-32 rounded-full bg-white border-4 border-background shadow-lg grid place-items-center overflow-hidden">
-          <img src={logoAsset.url} alt="AmoAçaí" className="h-full w-full object-contain p-1" />
+          <img src={ASSETS.logo} alt="AmoAçaí" className="h-full w-full object-contain p-1" />
         </div>
         <h1 className="mt-3 text-xl font-extrabold flex items-center justify-center gap-1.5">
           AmoAçaí
